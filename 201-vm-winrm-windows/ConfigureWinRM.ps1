@@ -82,11 +82,11 @@ function Add-FirewallException {
     param([string] $port)
 
     # Delete an exisitng rule
-    netsh advfirewall firewall delete rule name="Windows Remote Management (HTTPS-In)" dir=in protocol=TCP localport=$port
+    netsh advfirewall firewall delete rule name="Windows Remote Management (HTTPS-In)" dir=in protocol=TCP localport=5986
     netsh advfirewall firewall delete rule name="Windows Remote Management (HTTP-In)" dir=in protocol=tcp localport=$port 
     # Add a new firewall rule
     # netsh advfirewall firewall add rule name="Windows Remote Management (HTTPS-In)" dir=in action=allow protocol=TCP localport=$port
-    netsh advfirewall firewall add rule name="Windows Remote Management (HTTP-In)" dir=in action=allow profile=public protocol=tcp localport=$port remoteip=localsubnet new remoteip=any
+    #netsh advfirewall firewall add rule name="Windows Remote Management (HTTP-In)" dir=in action=allow profile=public protocol=tcp localport=$port remoteip=localsubnet new remoteip=any
 }
 
 
