@@ -22,11 +22,12 @@
     },
     "windowsOSVersion": {
       "type": "string",
-      "defaultValue": "2012-R2-Datacenter",
+      "defaultValue": "2016-Datacenter",
       "allowedValues": [
         "2008-R2-SP1",
         "2012-Datacenter",
-        "2012-R2-Datacenter"
+        "2012-R2-Datacenter",
+        "2016-Datacenter"
       ],
       "metadata": {
         "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version. Allowed values: 2008-R2-SP1, 2012-Datacenter, 2012-R2-Datacenter."
@@ -78,9 +79,10 @@
     "publicIPAddressName": "[parameters('publicIPAddressName')]",
     "publicIPAddressType": "Dynamic",
     "vmName": "[parameters('vmName')]",
-    "vmSize": "Standard_A2",
+    "vmSize": "Standard_D2_v3",
     "virtualNetworkName": "[parameters('virtualNetworkName')]",
-    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
+    /* "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",*/
+    "vnetID": "/subscriptions/8fb17b62-53cd-4405-9078-d4e120b26cc0/resourceGroups/Downloads/providers/Microsoft.Network/virtualNetworks/Downloads-vnet",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
     "apiVersion": "2015-06-15",
     "hostDNSNameScriptArgument": "[concat('*.',resourceGroup().location,'.cloudapp.azure.com')]"
@@ -100,33 +102,11 @@
     },
     {
       "apiVersion": "2015-06-15",
-      "type": "Microsoft.Network/virtualNetworks",
-      "name": "[variables('virtualNetworkName')]",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[variables('addressPrefix')]"
-          ]
-        },
-        "subnets": [
-          {
-            "name": "[variables('subnetName')]",
-            "properties": {
-              "addressPrefix": "[variables('subnetPrefix')]"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "apiVersion": "2015-06-15",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nicName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
-        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -196,8 +176,8 @@
             "typeHandlerVersion": "1.4",
             "settings": {
               "fileUris": [
-                "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-winrm-windows/ConfigureWinRM.ps1",
-                "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-winrm-windows/makecert.exe"
+                "https://raw.githubusercontent.com/ChristopherGQuinn1234/azure-quickstart-templates/master/201-vm-winrm-windows/ConfigureWinRM.ps1",
+                "https://raw.githubusercontent.com/ChristopherGQuinn1234/azure-quickstart-templates/master/201-vm-winrm-windows/makecert.exe"
               ],
               "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file ConfigureWinRM.ps1 ',variables('hostDNSNameScriptArgument'))]"
             }

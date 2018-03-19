@@ -1,30 +1,30 @@
 {
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {        
+    "parameters": {
         "adminUsername": {
-            "value": "yourusername"
+            "value": "CQuinn"
         },
         "adminPassword": {
-            "value": "GEN-PASSWORD"
+            "value": "Micr@softCont0s0"
         },
         "dnsLabelPrefix": {
             "value": "GEN-UNIQUE-13"
         },
         "vmName": {
-            "value": "MyVM"
+            "value": "cgqDemo4"
         },
         "nicName": {
             "value": "myVMNic"
         },
         "virtualNetworkName": {
-            "value": "MyVNET"
+            "value": "Downloads-vnet"
         },
         "publicIPAddressName": {
-            "value": "myPublicIP"
+            "value": "cgqPublicIP"
         },
         "subnetName": {
-            "value": "Subnet"
+            "value": "default"
         }
-   }
+    }
 }
