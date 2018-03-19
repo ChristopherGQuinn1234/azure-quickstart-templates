@@ -81,7 +81,6 @@
     "vmName": "[parameters('vmName')]",
     "vmSize": "Standard_D2_v3",
     "virtualNetworkName": "[parameters('virtualNetworkName')]",
-    /* "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",*/
     "vnetID": "/subscriptions/8fb17b62-53cd-4405-9078-d4e120b26cc0/resourceGroups/Downloads/providers/Microsoft.Network/virtualNetworks/Downloads-vnet",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
     "apiVersion": "2015-06-15",
